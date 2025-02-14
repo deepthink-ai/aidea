@@ -15,7 +15,7 @@ build-android:
 
 build-macos:
 	flutter build macos --no-tree-shake-icons --release
-	codesign -f -s "Developer ID Application: YIYAO  GUAN (N95437SZ2A)" build/macos/Build/Products/Release/AIdea.app
+	codesign -f -s "Developer ID Application: YIYAO  GUAN (N95437SZ2A)" build/macos/Build/Products/Release/DeepThink.app
 
 build-appimage:
 	flutter build linux --no-tree-shake-icons --release 
@@ -28,17 +28,17 @@ build-appimage:
 
 build-dmg: build-macos
 	rm -fr build/macos/Build/Products/Package
-	mkdir -p build/macos/Build/Products/Package && cp -r build/macos/Build/Products/Release/AIdea.app build/macos/Build/Products/Package
-	create-dmg --volname "AIdea Installer" \
+	mkdir -p build/macos/Build/Products/Package && cp -r build/macos/Build/Products/Release/DeepThink.app build/macos/Build/Products/Package
+	create-dmg --volname "DeepThink Installer" \
 		--volicon "install.icns" \
 		--background "assets/background-dark-s1.jpg" \
 		--window-pos 200 120 \
 		--window-size 600 320 \
 		--icon-size 100 \
-		--icon "AIdea.app" 170 130 \
-		--hide-extension "AIdea.app" \
+		--icon "DeepThink.app" 170 130 \
+		--hide-extension "DeepThink.app" \
 		--app-drop-link 430 130 \
-		"build/macos/Build/Products/Package/AIdea-Installer.dmg" \
+		"build/macos/Build/Products/Package/DeepThink-Installer.dmg" \
 		"build/macos/Build/Products/Package"
 	open build/macos/Build/Products/Package/
 

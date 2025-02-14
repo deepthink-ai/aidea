@@ -234,8 +234,8 @@ tobias:
   url_scheme: alipay2021004101661425
 
 msix_config:
-  display_name: AIdea
+  display_name: DeepThink
   publisher_display_name: Shenzhen Gulu Artificial Intelligence Technology Co., Ltd.
   identity_name: cc.aicode.flutter.askaide.askaide
   logo_path: assets/app.png
-  execution_alias: AIdea
+  execution_alias: DeepThink

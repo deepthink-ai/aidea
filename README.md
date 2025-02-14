@@ -1,4 +1,4 @@
-# AIdea - AI 聊天、协作、图像生成
+# DeepThink - AI 聊天、协作、图像生成
 
 [![FOSSA Status](https://app.fossa.com/api/projects/custom%2B39727%2Fgithub.com%2Fmylxsw%2Faidea.svg?type=shield&issueType=license)](https://app.fossa.com/projects/custom%2B39727%2Fgithub.com%2Fmylxsw%2Faidea?ref=badge_shield)
 ![GitHub release (by tag)](https://img.shields.io/github/downloads/mylxsw/aidea/1.0.4/total)
@@ -28,7 +28,7 @@ git checkout v1.x
 
 搭建开发环境，用来编译和打包 APP，可以参考下面的文章，更多文章后面有时间了会持续更新。
 
-- [AIdea 项目开发环境部署教程（一）前端 Flutter 环境搭建](https://mp.weixin.qq.com/s/bgAIH6s7t5IREusK_WtpRg)
+- [DeepThink 项目开发环境部署教程（一）前端 Flutter 环境搭建](https://mp.weixin.qq.com/s/bgAIH6s7t5IREusK_WtpRg)
 
 ## 私有化部署
 

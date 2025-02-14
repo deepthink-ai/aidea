@@ -175,7 +175,7 @@ class RoomBloc extends BlocExt<RoomEvent, RoomState> {
           final room = await chatMsgRepo.createRoom(
             name: event.name,
             category: 'chat',
-            model: event.model ?? 'gpt-4o',
+            model: event.model,
             systemPrompt: event.prompt,
             userId: APIServer().localUserID(),
             maxContext: event.maxContext,

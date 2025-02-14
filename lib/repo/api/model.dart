@@ -29,15 +29,15 @@ class HomeModelV2 {
 
   static HomeModelV2 fromJson(Map<String, dynamic> json) {
     return HomeModelV2(
-      type: json['type'],
-      id: json['id'],
-      name: json['name'],
-      modelId: json['model_id'],
-      modelName: json['model_name'],
+      type: json['type'] ?? '',
+      id: json['id'] ?? '',
+      name: json['name'] ?? '',
+      modelId: json['model_id'] ?? '',
+      modelName: json['model_name'] ?? '',
       supportVision: json['support_vision'] ?? false,
       supportReasoning: json['support_reasoning'] ?? false,
       supportSearch: json['support_search'] ?? false,
-      avatarUrl: json['avatar_url'],
+      avatarUrl: json['avatar_url'] ?? '',
     );
   }
 

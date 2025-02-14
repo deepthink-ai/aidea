@@ -1318,7 +1318,7 @@ class _MyAppState extends State<MyApp> {
             return Sizer(
               builder: (context, orientation, deviceType) {
                 return MaterialApp.router(
-                  title: 'AIdea',
+                  title: 'DeepThink',
                   themeMode: appTheme.mode,
                   theme: createLightThemeData(),
                   darkTheme: createDarkThemeData(),

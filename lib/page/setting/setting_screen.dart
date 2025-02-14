@@ -133,21 +133,21 @@ class _SettingScreenState extends State<SettingScreen> {
                     title: Text(AppLocale.systemInfo.getString(context)),
                     tiles: [
                       // 只有 Web 端才展示 App 下载
-                      if (PlatformTool.isWeb())
-                        SettingsTile(
-                          title: const Text('APP 下载'),
-                          trailing: const Icon(
-                            Icons.download,
-                            size: 18,
-                            color: Colors.grey,
-                          ),
-                          onPressed: (context) {
-                            launchUrlString(
-                              'https://aidea.aicode.cc',
-                              mode: LaunchMode.externalApplication,
-                            );
-                          },
-                        ),
+                      // if (PlatformTool.isWeb())
+                      //   SettingsTile(
+                      //     title: const Text('APP 下载'),
+                      //     trailing: const Icon(
+                      //       Icons.download,
+                      //       size: 18,
+                      //       color: Colors.grey,
+                      //     ),
+                      //     onPressed: (context) {
+                      //       launchUrlString(
+                      //         'https://aidea.aicode.cc',
+                      //         mode: LaunchMode.externalApplication,
+                      //       );
+                      //     },
+                      //   ),
                       // 服务状态
                       if (Ability().serviceStatusPage != '')
                         SettingsTile(
@@ -260,7 +260,7 @@ class _SettingScreenState extends State<SettingScreen> {
                           var tapCount = 0;
                           showAboutDialog(
                             context: context,
-                            applicationName: 'AIdea',
+                            applicationName: 'DeepThink',
                             applicationIcon: GestureDetector(
                               onTap: () {
                                 if (userHasLabPermission(state)) {
@@ -313,7 +313,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       ],
                     ),
                   // 社交媒体图标
-                  _buildSocialIcons(context),
+                  // _buildSocialIcons(context),
                   // 版权信息
                   CustomSettingsSection(
                     child: Column(
@@ -324,21 +324,21 @@ class _SettingScreenState extends State<SettingScreen> {
                             color: customColors.weakTextColor,
                           ),
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            launchUrlString(
-                              'https://aidea.aicode.cc',
-                              mode: LaunchMode.externalApplication,
-                            );
-                          },
-                          child: Text(
-                            'Gulu Artificial Intelligence Technology Co., Ltd.',
-                            style: TextStyle(
-                              color: customColors.weakTextColor,
-                              fontSize: 12,
-                            ),
-                          ),
-                        ),
+                        // GestureDetector(
+                        //   onTap: () {
+                        //     launchUrlString(
+                        //       'https://aidea.aicode.cc',
+                        //       mode: LaunchMode.externalApplication,
+                        //     );
+                        //   },
+                        //   child: Text(
+                        //     'Gulu Artificial Intelligence Technology Co., Ltd.',
+                        //     style: TextStyle(
+                        //       color: customColors.weakTextColor,
+                        //       fontSize: 12,
+                        //     ),
+                        //   ),
+                        // ),
                         const SizedBox(height: 15),
                       ],
                     ),

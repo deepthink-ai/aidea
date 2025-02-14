@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:animated_list_plus/animated_list_plus.dart';
 import 'package:animated_list_plus/transitions.dart';
 import 'package:askaide/bloc/model_bloc.dart';
+import 'package:askaide/helper/logger.dart';
 import 'package:askaide/helper/upload.dart';
 import 'package:askaide/lang/lang.dart';
 import 'package:askaide/page/component/avatar_selector.dart';
@@ -984,6 +985,7 @@ class _AdminModelEditPageState extends State<AdminModelEditPage> {
         final res = await ImageUploader(widget.setting).upload(avatarUrl!, usage: 'avatar');
         avatarUrl = res.url;
       } catch (e) {
+        Logger.instance.e('Failed to upload avatar', error: e);
         showErrorMessage('Failed to upload avatar');
         cancel();
         return;

@@ -854,7 +854,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
         await Stripe.instance.initPaymentSheet(
           paymentSheetParameters: SetupPaymentSheetParameters(
             paymentIntentClientSecret: created.paymentIntent,
-            merchantDisplayName: 'AIdea',
+            merchantDisplayName: 'DeepThink',
             customerId: created.customer,
             customerEphemeralKeySecret: created.ephemeralKey,
             returnURL: 'flutterstripe://redirect',

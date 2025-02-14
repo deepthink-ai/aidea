@@ -22,8 +22,7 @@ import 'package:url_launcher/url_launcher_string.dart';
 class VoiceRecord extends StatefulWidget {
   final Function(String text) onFinished;
   final Function() onStart;
-  const VoiceRecord(
-      {super.key, required this.onFinished, required this.onStart});
+  const VoiceRecord({super.key, required this.onFinished, required this.onStart});
 
   @override
   State<VoiceRecord> createState() => _VoiceRecordState();
@@ -87,8 +86,7 @@ class _VoiceRecordState extends State<VoiceRecord> {
                 showCancelBtn: false,
                 title: '温馨提示',
                 child: Markdown(
-                  data:
-                      'Web 端暂不支持语音输入，敬请期待。\n\n要体验完整功能，您可[点击这里下载 AIdea APP](https://aidea.aicode.cc)。',
+                  data: 'Web 端暂不支持语音输入，敬请期待。\n\n要体验完整功能，您可[点击这里下载 DeepThink APP](https://aidea.aicode.cc)。',
                   onUrlTap: (value) {
                     launchUrlString(
                       value,
@@ -117,9 +115,7 @@ class _VoiceRecordState extends State<VoiceRecord> {
               // Start recording
               await record.start(
                 RecordConfig(
-                  encoder: PlatformTool.isWindows() || PlatformTool.isIOS()
-                      ? AudioEncoder.aacLc
-                      : AudioEncoder.wav,
+                  encoder: PlatformTool.isWindows() || PlatformTool.isIOS() ? AudioEncoder.aacLc : AudioEncoder.wav,
                 ),
                 path: "${PathHelper().getCachePath}/${randomId()}.m4a",
               );
@@ -132,23 +128,19 @@ class _VoiceRecordState extends State<VoiceRecord> {
                 _timer = null;
               }
 
-              _timer = Timer.periodic(const Duration(milliseconds: 100),
-                  (timer) async {
+              _timer = Timer.periodic(const Duration(milliseconds: 100), (timer) async {
                 if (_voiceStartTime == null) {
                   timer.cancel();
                   return;
                 }
 
-                if (DateTime.now().difference(_voiceStartTime!).inSeconds >=
-                    60) {
+                if (DateTime.now().difference(_voiceStartTime!).inSeconds >= 60) {
                   await onRecordStop();
                   return;
                 }
 
                 setState(() {
-                  _millSeconds = DateTime.now()
-                      .difference(_voiceStartTime!)
-                      .inMilliseconds;
+                  _millSeconds = DateTime.now().difference(_voiceStartTime!).inMilliseconds;
                 });
               });
             }
@@ -168,9 +160,7 @@ class _VoiceRecordState extends State<VoiceRecord> {
             height: 80,
             width: 80,
             child: CircleAvatar(
-              backgroundColor: _voiceRecording
-                  ? customColors.linkColor
-                  : customColors.linkColor?.withAlpha(200),
+              backgroundColor: _voiceRecording ? customColors.linkColor : customColors.linkColor?.withAlpha(200),
               child: const Icon(
                 Icons.mic,
                 size: 50,
