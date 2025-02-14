@@ -3,8 +3,8 @@
 
 #define MyAppName "DeepThink"
 #define MyAppVersion "1.0.15"
-#define MyAppPublisher "Shenzhen Gulu Artificial Intelligence Technology Co., Ltd."
-#define MyAppURL "https://ai.aicode.cc/"
+#define MyAppPublisher "DeepThink Technology Co., Ltd."
+#define MyAppURL "https://app.deepthink.run/"
 #define MyAppExeName "DeepThink.exe"
 
 [Setup]

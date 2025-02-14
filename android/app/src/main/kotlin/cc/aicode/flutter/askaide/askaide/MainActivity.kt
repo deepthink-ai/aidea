@@ -1,4 +1,4 @@
-package cc.aicode.flutter.askaide.askaide
+package run.deepthink.app
 
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.android.FlutterFragmentActivity

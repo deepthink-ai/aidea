@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="cc.aicode.flutter.askaide.askaide">
+    package="run.deepthink.app">
    <application
         android:label="DeepThink"
         android:name="${applicationName}"

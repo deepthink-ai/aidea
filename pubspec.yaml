@@ -235,7 +235,7 @@ tobias:
 
 msix_config:
   display_name: DeepThink
-  publisher_display_name: Shenzhen Gulu Artificial Intelligence Technology Co., Ltd.
-  identity_name: cc.aicode.flutter.askaide.askaide
+  publisher_display_name: DeepThink Technology Co., Ltd.
+  identity_name: run.deepthink.app
   logo_path: assets/app.png
   execution_alias: DeepThink
