@@ -10,22 +10,19 @@ class PathHelper {
 
   init() async {
     try {
-      cachePath =
-          (await getApplicationCacheDirectory()).path.replaceAll('\\', '/');
+      cachePath = (await getApplicationCacheDirectory()).path.replaceAll('\\', '/');
     } catch (e) {
       cachePath = '';
     }
 
     try {
-      documentsPath =
-          (await getApplicationDocumentsDirectory()).path.replaceAll('\\', '/');
+      documentsPath = (await getApplicationDocumentsDirectory()).path.replaceAll('\\', '/');
     } catch (e) {
       documentsPath = '';
     }
 
     try {
-      supportPath =
-          (await getApplicationSupportDirectory()).path.replaceAll('\\', '/');
+      supportPath = (await getApplicationSupportDirectory()).path.replaceAll('\\', '/');
     } catch (e) {
       supportPath = '';
     }
@@ -40,20 +37,18 @@ class PathHelper {
 
   String get getHomePath {
     if (PlatformTool.isMacOS() || PlatformTool.isLinux()) {
-      return '${Platform.environment['HOME'] ?? ''}/.aidea'
-          .replaceAll('\\', '/');
+      return '${Platform.environment['HOME'] ?? ''}/.deepthink'.replaceAll('\\', '/');
     } else if (PlatformTool.isWindows()) {
-      return '${Platform.environment['UserProfile'] ?? ''}/.aidea'
-          .replaceAll('\\', '/');
+      return '${Platform.environment['UserProfile'] ?? ''}/.deepthink'.replaceAll('\\', '/');
     } else if (PlatformTool.isAndroid() || PlatformTool.isIOS()) {
-      return '$documentsPath/.aidea'.replaceAll('\\', '/');
+      return '$documentsPath/.deepthink'.replaceAll('\\', '/');
     }
 
-    return '.aidea';
+    return '.deepthink';
   }
 
   String get getLogfilePath {
-    return '$getHomePath/aidea.log';
+    return '$getHomePath/deepthink.log';
   }
 
   String get getCachePath {
