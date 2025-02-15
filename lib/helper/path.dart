@@ -1,4 +1,5 @@
 import 'dart:io' show Directory, Platform;
+import 'package:askaide/helper/constant.dart';
 import 'package:askaide/helper/logger.dart';
 import 'package:askaide/helper/platform.dart';
 import 'package:path_provider/path_provider.dart';
@@ -31,20 +32,20 @@ class PathHelper {
     try {
       Directory(getHomePath).create(recursive: true);
     } catch (e) {
-      Logger.instance.e('创建 $getHomePath 目录失败: $e');
+      Logger.instance.e('Create $getHomePath directory failed: $e');
     }
   }
 
   String get getHomePath {
     if (PlatformTool.isMacOS() || PlatformTool.isLinux()) {
-      return '${Platform.environment['HOME'] ?? ''}/.deepthink'.replaceAll('\\', '/');
+      return '${Platform.environment['HOME'] ?? ''}/$homePathDirName'.replaceAll('\\', '/');
     } else if (PlatformTool.isWindows()) {
-      return '${Platform.environment['UserProfile'] ?? ''}/.deepthink'.replaceAll('\\', '/');
+      return '${Platform.environment['UserProfile'] ?? ''}/$homePathDirName'.replaceAll('\\', '/');
     } else if (PlatformTool.isAndroid() || PlatformTool.isIOS()) {
-      return '$documentsPath/.deepthink'.replaceAll('\\', '/');
+      return '$documentsPath/$homePathDirName'.replaceAll('\\', '/');
     }
 
-    return '.deepthink';
+    return homePathDirName;
   }
 
   String get getLogfilePath {
