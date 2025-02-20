@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-VERSION=2.0.0-3
+VERSION=2.0.0-4
 DOCKER_REPO=mylxsw
 
 rm -fr build/web

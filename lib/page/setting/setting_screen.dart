@@ -235,7 +235,7 @@ class _SettingScreenState extends State<SettingScreen> {
                             color: Colors.grey,
                           ),
                           onPressed: (_) {
-                            launchUrl(Uri.parse('https://ai.aicode.cc/terms-user.html'));
+                            launchUrl(Uri.parse('$apiServerURL/public/info/terms-of-user'));
                           },
                         ),
                         // 隐私政策
@@ -247,7 +247,7 @@ class _SettingScreenState extends State<SettingScreen> {
                             color: Colors.grey,
                           ),
                           onPressed: (_) {
-                            launchUrl(Uri.parse('https://ai.aicode.cc/privacy-policy.html'));
+                            launchUrl(Uri.parse('$apiServerURL/public/info/privacy-policy'));
                           },
                         ),
 
