@@ -61,6 +61,7 @@ class _AdminModelEditPageState extends State<AdminModelEditPage> {
   final TextEditingController perRequestPriceController = TextEditingController();
   final TextEditingController promptController = TextEditingController();
   final TextEditingController categoryController = TextEditingController();
+  final TextEditingController searchPriceController = TextEditingController();
 
   /// 用于控制是否显示高级选项
   bool showAdvancedOptions = false;
@@ -85,6 +86,11 @@ class _AdminModelEditPageState extends State<AdminModelEditPage> {
 
   /// 是否启用推理
   bool enableReasoning = false;
+
+  /// 温度
+  double temperature = 0.0;
+  // 搜索结果数量
+  int searchCount = 0;
 
   /// Tag
   final TextEditingController tagController = TextEditingController();
@@ -116,7 +122,7 @@ class _AdminModelEditPageState extends State<AdminModelEditPage> {
     promptController.dispose();
     categoryController.dispose();
     tagController.dispose();
-
+    searchPriceController.dispose();
     super.dispose();
   }
 
@@ -141,6 +147,7 @@ class _AdminModelEditPageState extends State<AdminModelEditPage> {
     inputPriceController.value = const TextEditingValue(text: '0');
     outputPriceController.value = const TextEditingValue(text: '0');
     perRequestPriceController.value = const TextEditingValue(text: '0');
+    searchPriceController.value = const TextEditingValue(text: '0');
 
     super.initState();
   }
@@ -213,6 +220,10 @@ class _AdminModelEditPageState extends State<AdminModelEditPage> {
                           TextEditingValue(text: state.model.meta!.perReqPrice.toString());
                     }
 
+                    if (state.model.meta!.searchPrice != null) {
+                      searchPriceController.value = TextEditingValue(text: state.model.meta!.searchPrice.toString());
+                    }
+
                     shortNameController.value = TextEditingValue(text: state.model.shortName ?? '');
                     promptController.value = TextEditingValue(text: state.model.meta!.prompt ?? '');
                     supportVision = state.model.meta!.vision ?? false;
@@ -225,6 +236,8 @@ class _AdminModelEditPageState extends State<AdminModelEditPage> {
                     categoryController.value = TextEditingValue(text: state.model.meta!.category ?? '');
                     enableSearch = state.model.meta!.search ?? false;
                     enableReasoning = state.model.meta!.reasoning ?? false;
+                    temperature = state.model.meta!.temperature ?? 0.0;
+                    searchCount = state.model.meta!.searchCount ?? 0;
 
                     setState(() {});
                   }
@@ -404,6 +417,26 @@ class _AdminModelEditPageState extends State<AdminModelEditPage> {
                         ),
                         EnhancedTextField(
                           labelWidth: 120,
+                          labelText: 'Search Price',
+                          customColors: customColors,
+                          controller: searchPriceController,
+                          textAlignVertical: TextAlignVertical.top,
+                          hintText: 'Optional',
+                          showCounter: false,
+                          keyboardType: TextInputType.number,
+                          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                          textDirection: TextDirection.rtl,
+                          suffixIcon: Container(
+                            width: 110,
+                            alignment: Alignment.center,
+                            child: Text(
+                              'Credits/Request',
+                              style: TextStyle(color: customColors.weakTextColor, fontSize: 12),
+                            ),
+                          ),
+                        ),
+                        EnhancedTextField(
+                          labelWidth: 120,
                           labelText: 'Context Len',
                           customColors: customColors,
                           controller: maxContextController,
@@ -501,7 +534,15 @@ class _AdminModelEditPageState extends State<AdminModelEditPage> {
                                                 ...modelChannels
                                                     .map(
                                                       (e) => SelectorItem(
-                                                        Text('${e.id == null ? '【System】' : ''}${e.name}'),
+                                                        Text(
+                                                          '${e.id == null ? '【Legacy】' : ''}${e.name}',
+                                                          style: e.id == null
+                                                              ? TextStyle(
+                                                                  color: customColors.weakTextColorLess,
+                                                                  decoration: TextDecoration.lineThrough,
+                                                                )
+                                                              : null,
+                                                        ),
                                                         e,
                                                       ),
                                                     )
@@ -552,6 +593,45 @@ class _AdminModelEditPageState extends State<AdminModelEditPage> {
                                               color: customColors.weakLinkColor?.withAlpha(150),
                                             ),
                                           ),
+                                        ),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                const Text(
+                                                  'Deep Think Model',
+                                                  style: TextStyle(fontSize: 16),
+                                                ),
+                                                const SizedBox(width: 5),
+                                                InkWell(
+                                                  onTap: () {
+                                                    showBeautyDialog(
+                                                      context,
+                                                      type: QuickAlertType.info,
+                                                      text: 'Whether the model is an Deep Thinking model.',
+                                                      confirmBtnText: AppLocale.gotIt.getString(context),
+                                                      showCancelBtn: false,
+                                                    );
+                                                  },
+                                                  child: Icon(
+                                                    Icons.help_outline,
+                                                    size: 16,
+                                                    color: customColors.weakLinkColor?.withAlpha(150),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            CupertinoSwitch(
+                                              activeColor: customColors.linkColor,
+                                              value: providers[index].type == 'reasoning',
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  providers[index].type = value ? 'reasoning' : 'default';
+                                                });
+                                              },
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
@@ -813,7 +893,7 @@ class _AdminModelEditPageState extends State<AdminModelEditPage> {
                               Row(
                                 children: [
                                   const Text(
-                                    'Reasoning',
+                                    'Deep Think',
                                     style: TextStyle(fontSize: 16),
                                   ),
                                   const SizedBox(width: 5),
@@ -822,7 +902,7 @@ class _AdminModelEditPageState extends State<AdminModelEditPage> {
                                       showBeautyDialog(
                                         context,
                                         type: QuickAlertType.info,
-                                        text: 'Whether to enable reasoning for the current model.',
+                                        text: 'Whether to enable Deep Think for the current model.',
                                         confirmBtnText: AppLocale.gotIt.getString(context),
                                         showCancelBtn: false,
                                       );
@@ -844,6 +924,38 @@ class _AdminModelEditPageState extends State<AdminModelEditPage> {
                                   });
                                 },
                               ),
+                            ],
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text('Temperature', style: TextStyle(fontSize: 16)),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Slider(
+                                      value: temperature,
+                                      min: 0.0,
+                                      max: 2.0,
+                                      divisions: 40,
+                                      label: '$temperature',
+                                      activeColor: customColors.linkColor,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          temperature = value;
+                                        });
+                                      },
+                                    ),
+                                  ),
+                                  Text(
+                                    '$temperature',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: customColors.weakTextColor,
+                                    ),
+                                  ),
+                                ],
+                              )
                             ],
                           ),
                           Row(
@@ -885,6 +997,39 @@ class _AdminModelEditPageState extends State<AdminModelEditPage> {
                               ),
                             ],
                           ),
+                          if (enableSearch)
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text('Search Result Count', style: TextStyle(fontSize: 16)),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Slider(
+                                        value: searchCount.toDouble(),
+                                        min: 0,
+                                        max: 5,
+                                        divisions: 5,
+                                        label: '$searchCount',
+                                        activeColor: customColors.linkColor,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            searchCount = value.toInt();
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                    Text(
+                                      '$searchCount',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: customColors.weakTextColor,
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -1020,6 +1165,9 @@ class _AdminModelEditPageState extends State<AdminModelEditPage> {
         isRecommend: isRecommended,
         search: enableSearch,
         reasoning: enableReasoning,
+        temperature: temperature,
+        searchCount: searchCount,
+        searchPrice: int.parse(searchPriceController.text),
       ),
       status: modelEnabled ? 1 : 2,
       providers: ps,
