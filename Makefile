@@ -12,6 +12,7 @@ build-android:
 
 build-macos:
 	flutter build macos --no-tree-shake-icons --release
+	codesign -f -s "Developer ID Application: YIYAO  GUAN (N95437SZ2A)" build/macos/Build/Products/Release/DeepThink.app
 
 build-web:
 	flutter build web --web-renderer canvaskit --release
